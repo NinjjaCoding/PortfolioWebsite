@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Three.js is cool!</title>
+    <link rel="stylesheet" href="./main.css">  
+    <link href="./index.js">
+</head>
+<!-- run a live server then run index.html -->
+<body> 
+    
+    <!-- Navigation menu -->
+    <nav class="navbar" id="TopNav">
+        <ul>
+          <a class="active" href="../index.html">
+              <i class=" fa fa-home"></i> 
+            Home</a>
+          <a href="../movingboxes/index.html">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+            Moving Boxes</a>
+
+          <a href="../GeoGame1/index.html">
+              <i class="fa fa-gamepad" aria-hidden="true"></i>
+            Geometry Games</a>
+
+          <a href="../cloudNebula/src/index.html"><i class="fa fa-cloud"           aria-hidden="true"></i>
+            Galaxy Clouds </a>
+
+          <a href="../cloudNebula/src/index.html"> <i class="fa fa-fw fa-envelope"></i> Contact</a>
+
+          <a href="../cloudNebula/src/index.html"><i class="fa fa-fw fa-user"></i> Login</a>
+        
+          <a class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i></a>
+        </ul>        
+      </nav>
+
+
+ <div id="container" class="container">
+     <div>
+         
+         <h1> Threejs is pretty cool! 
+             <span>Move around your pointer</span>
+            </h1>  
+     </div>  
+ </div>
+    
+ 
+
+    <!-- these scripts is like bootstrap to access libraries instead of loading files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.5/dat-gui.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+    <!-- the script below will hold the code for our page -->
+    <script>
+        // we need 3 things: 1. scene 2. camera 3.renderer 4. lighting
+        const scene = new THREE.Scene(); 
+
+            //camera 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.01, 100);
+            camera.position.z = 5;
+
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true }); //antialias makes it less jagged edges 
+        renderer.setClearColor("#e5e5e5"); //this is background color
+        renderer.setSize(window.innerWidth, window.innerHeight); //size can be hard coded or adjust to window
+
+        document.body.appendChild(renderer.domElement); //this creates our canvas element using renderer settings 
+
+        window.addEventListener( '[resize', () => { //to make it responsive so reset renderer size and camera aspect
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight; 
+
+            camera.updateProjectionMatrix(); 
+        })
+
+        
+        //raycaster & mouse for objective interactivity 
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+            const material = new THREE.MeshLambertMaterial({ color: "orange"});
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.y = 2;
+            scene.add(mesh);
+
+            //so let us instead of this commented put random meshes all over the screen
+            randomMesh = -5; 
+            for (let i = 0; i < 45; i++) {
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = (Math.random() - 0.5) *10;
+                mesh.position.y = (Math.random() - 0.5) *10;
+                mesh.position.z = (Math.random() - 0.52) *10;
+
+                scene.add(mesh);
+                randomMesh +=1; 
+            }
+
+
+            const light = new THREE.PointLight(0xffffff, 2, 1000); //color, intensity, distance of 500
+            light.position.set(0, 0, 25);
+            scene.add(light);
+
+
+                //renderer
+            const render = function() {
+                requestAnimationFrame(render); //requests frame per seoond refresh on brwoser to adjust 
+
+
+                renderer.render(scene, camera);
+            }
+
+                //Make responsive 
+            window.addEventListener('resize', function() {
+            renderer.setSize(this.window.innerWidth, this.window.innerHeight);
+                renderer.setPixelRatio(this.window.devicePixelRatio);
+                camera.aspect= window.innerWidth, window.innerHeight
+            })
+
+            function onMouseMove(event) {
+                event.preventDefault(); //prevents from default click
+
+                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1; //these are from docs 
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera); //used to trace the mouse 
+
+                const intersects = raycaster.intersectObjects(scene.children, true);
+                    for (let i = 0; i < intersects.length; i++) {
+                             this.timeLine = new TimelineMax();
+                            this.timeLine.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut}); //adn we can play and add to this
+                            this.timeLine.to(intersects[i].object.scale, .5, {y: .5, ease: Expo.easeOut}); 
+                            this.timeLine.to(intersects[i].object.position, 1.5, {z: 3, ease: Expo.easeOut}); 
+                            this.timeLine.to(intersects[i].object.rotation, .5, {x: 2, ease: Expo.easeOut}); 
+                            this.timeLine.to(intersects[i].object.scale, .5, {y: Math.PI* .5, ease: Expo.easeOut}, "=-1.5");
+                    }
+                }
+
+            render();
+            
+            //to make it specific object we need RayCaster and mouse variable using THREE
+            window.addEventListener('mousemove', onMouseMove);
+
+    </script>
+    </body>
+</html>

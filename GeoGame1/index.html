@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+        
+    
+    <!-- Page title -->
+    <title>3D Landing Page </title>
+    <style> body {margin: 0;} </style>
+    
+     
+        <!-- three.js module -->
+     <script type="module" src="./main.js" Content-Type="text/html"></script>
+     
+    </head>
+
+<!-- 1. run npm install 2. npx parcel src/index.html   
+this app is bundled with istparcel bundler  -->
+<body>
+    
+    <h1>Hello World !!!</h1>
+    <button type="button" >
+        <a href="../index.html" id="prevpage" >Home Page</a>
+      </button>
+        <script id="vertexShader" type="vertex">
+            void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * Vector4(position, 1.0);
+        }</script>
+
+        <script id="fragmentShader" type="fragment">
+         void main() {
+             gl_FragColor = vec4(0.1, 1.0, 1,0);
+         }</script>
+
+    
+    </body>
+</html>

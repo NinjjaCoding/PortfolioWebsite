@@ -1,0 +1,193 @@
+@import url("https://use.typekit.net/jmk3xov.css");
+body{
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: black;
+}
+
+canvas {
+  position: block;
+  top: 0;
+  left: 0;
+}
+:root {
+  --dark-bg: rgba(15, 15, 15, 0.65);
+  --spacing: 350px;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+main {
+  width: 100vw;
+  color: white;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  margin: 0px auto;
+  padding: 0px 0px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); 
+ } 
+
+ h1, h2, h3,blockquote {
+  font-family: san-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+  header {
+    background: var(--dark-bg);
+    grid-column: 2 / span 5;
+    font-size: 2.5rem;
+    padding: 2rem;
+    margin-bottom: var(--spacing);
+  }
+
+  section {
+    grid-column: 2 / 8;
+    padding: 1rem;
+    background: var(--dark-bg);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing);
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 0;
+    grid-column: 2 / span 9;
+    margin-bottom: var(--spacing);
+  }
+
+  blockquote p {
+    color: black;
+    background-color: lightgrey;
+    font-size: 4rem;
+    display: auto;
+    line-height: 1;
+  }
+  .left {
+    grid-column: 6 / 12;
+  }
+
+  .btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+  } 
+   .btn:hover {
+    background-color: green;
+   }
+
+.navbar {
+  width: 100%;
+  background-color: rgba(15, 15, 15, 0.65);
+  overflow: auto;
+  position: fixed; 
+  z-index: 1;
+}
+.navbar2 {
+  width: 100%;
+  background-color: rgba(15, 15, 15, 0.65);
+  overflow: auto;
+  position: absolute; 
+  z-index: 1;
+}
+.navbar, a {
+  float: left;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+ .navbar a:hover {
+  background-color: orange;
+  border-radius: 10px;
+}
+.navbar .active {
+  background-color: #04AA6D;
+  border-radius: 10px;
+}
+
+.navbar .icon{
+  display: none;
+}
+
+/* //nvabar responsive */
+@media screen and (max-width: 600px) {
+  .navbar a:not(:first-child) {display: now;}
+  .navbar a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* navbar javascript when user clicks on the icon */
+@media screen and (max-width: 600px) {
+  .navbar.responsive {position: relative;}
+  .navbar.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+  }
+}
+
+.button{
+  background-color: blue;
+  color: white;
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+#github{
+  background-color: blue;
+  border-radius: 20px;
+  flex-direction: end;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+/* //footer */
+.footer a:hover {
+  background-color: black;
+  /* border-radius: 10px; */
+}
+.footer .active {
+  background-color: blue;
+}
+
+  
